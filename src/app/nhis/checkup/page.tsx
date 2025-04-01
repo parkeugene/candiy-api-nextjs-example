@@ -35,17 +35,20 @@ export default function NhisPage() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
             });
-
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            const data = await response.json();
+            const responseObject = await response.json();
+            if (response.status === 500) throw new Error(`Server error occurred, please try again later. \nstatus: ${response.status}, message: ${responseObject?.message || "Unknown error"}`);
+            if (responseObject.status !== 'success') throw new Error(`Client errror occurred, message: ${responseObject?.message || "Unknown error"}`);
+            
+            const data = responseObject.data;
+            
             setMultiFactorInfo({
-                transactionId: data.data.transactionId,
-                jobIndex: data.data.jobIndex,
-                threadIndex: data.data.threadIndex,
-                multiFactorTimestamp: data.data.multiFactorTimestamp,
+                transactionId: data.transactionId,
+                jobIndex: data.jobIndex,
+                threadIndex: data.threadIndex,
+                multiFactorTimestamp: data.multiFactorTimestamp,
             });
         } catch (err) {
-            setError({ id: `Failed to fetch data: ${(err as Error).message}` });
+            setError({ id: `${(err as Error).message}` });
         } finally {
             setLoading(false);
         }
@@ -70,10 +73,11 @@ export default function NhisPage() {
                 body: JSON.stringify(finalRequestBody),
             });
 
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.message || "API 요청 실패");
-
-            setResponseData(data);
+            const responseObject = await response.json();
+            if (response.status === 500) throw new Error(`Server error occurred, please try again later. \nstatus: ${response.status}, message: ${responseObject?.message || "Unknown error"}`);
+            if (responseObject.status !== 'success') throw new Error(`Client errror occurred, message: ${responseObject?.message || "Unknown error"}`);
+            
+            setResponseData(responseObject);
         } catch (err) {
             setError({ id: err instanceof Error ? err.message : "알 수 없는 오류 발생" });
         }

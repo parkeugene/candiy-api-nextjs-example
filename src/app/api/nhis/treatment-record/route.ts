@@ -12,12 +12,12 @@ export async function POST(req: NextRequest) {
             },
             body: JSON.stringify(body),
         });
+        const data = await candiyResponse.json();
 
-        if (!candiyResponse.ok) {
+        // 500은 구조 자체가 달라지는 문제가 있음.
+        if (candiyResponse.status === 500) {
             throw new Error(`Candiy API Error: ${candiyResponse.statusText}`);
         }
-
-        const data = await candiyResponse.json();
 
         //database 저장
 
