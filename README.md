@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CANDIY API 예제 (Next.js 사용)
 
-## Getting Started
+## 시작하기
+.env.example 파일을 복사하여 `.env.local`로 이름을 바꾸고, API 키를 입력하세요.
 
-First, run the development server:
+API 키는 [CANDIY API](https://developer.candiy.io/)에서 발급받을 수 있습니다.
 
 ```bash
+cp .env.example .env.local
+```
+
+## 의존성 설치
+이 프로젝트는 [Node.js](https://nodejs.org/)와 [npm](https://www.npmjs.com/) 또는 [yarn](https://yarnpkg.com/) 또는 [pnpm](https://pnpm.io/) 또는 [bun](https://bun.sh/)을 사용합니다.
+의존성을 설치하려면 다음 명령어를 실행하세요:
+
+```bash
+npm install
+# 또는
+yarn install
+# 또는
+pnpm install
+# 또는
+bun install
+````
+
+
+서버를 시작하려면 다음 명령어를 실행하세요:
+```bash
 npm run dev
-# or
+# 또는
 yarn dev
-# or
+# 또는
 pnpm dev
-# or
+# 또는
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 브라우저 열기
+브라우저를 열고 [http://localhost:3000](http://localhost:3000)로 이동하세요.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API 라우트
+API 라우트는 `src/app/api` 디렉터리에 위치해 있습니다. 다음과 같은 라우트를 사용할 수 있습니다:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 페이지
+- `/` - 홈페이지
+- `/nhis/checkup` - 국민건강보험(NHIS) 건강검진 조회 예제 페이지
+- `/nhis/treatment-record` - 국민건강보험(NHIS) 진료 및 투약정보 조회 예제 페이지
