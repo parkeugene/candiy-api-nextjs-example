@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { FormDataType, MultiFactorInfo, FormError } from "@/app/types/nhis";
 import Button from "@/app/components/Button";
-import Form from "@/app/components/Form";
+import NhisForm from "@/app/components/form/NhisForm";
 import { validateField, validateForm } from "@/app/utils/nhis-validation";
 
 export default function NhisPage() {
@@ -93,7 +93,7 @@ export default function NhisPage() {
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4 text-center">Candiy API 예제  - 건강검진결과</h1>
             <div className="space-y-3 max-w-lg mx-auto">
-                <Form
+                <NhisForm
                     formData={formData}
                     handleChange={handleChange}
                     renderInputField={(name, type, placeholder, value) => (

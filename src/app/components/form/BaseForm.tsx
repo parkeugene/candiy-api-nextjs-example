@@ -1,27 +1,27 @@
-import { FormDataType } from "../types/nhis";
-import {JSX} from "react";
+import { JSX } from "react";
 
-interface FormProps {
-    formData: FormDataType;
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+interface BaseFormProps<T> {
+    formData: T;
     renderInputField: (
-        name: keyof FormDataType,
+        name: keyof T,
         type: string,
         placeholder: string,
         value: string
     ) => JSX.Element;
     renderSelectField: (
-        name: keyof FormDataType, 
+        name: keyof T, 
         value: string, 
         options: { key: string; value: string }[]
     ) => JSX.Element;
+    additionalFields?: JSX.Element;
 }
 
-const Form: React.FC<FormProps> = ({
-                                       formData,
-                                       renderInputField,
-                                       renderSelectField,
-                                   }) => {
+const BaseForm = <T extends Record<string, any>>({
+    formData,
+    renderInputField,
+    renderSelectField,
+    additionalFields
+}: BaseFormProps<T>) => {
     return (
         <div className="space-y-3 max-w-lg mx-auto">
             {renderSelectField("loginTypeLevel", formData.loginTypeLevel, [
@@ -50,8 +50,10 @@ const Form: React.FC<FormProps> = ({
                 { key: "KT(KT알뜰폰)", value: "1" },
                 { key: "LG U+(LG U+알뜰폰)", value: "2" },
             ])}
+
+            {additionalFields}
         </div>
     );
 };
 
-export default Form;
+export default BaseForm; 
