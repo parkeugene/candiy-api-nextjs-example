@@ -112,7 +112,7 @@ export default function NhisPage() {
                             name={name}
                             value={value}
                             onChange={handleChange}
-                            className="w-full p-4 h-10 border rounded"
+                            className="w-full h-10 border rounded"
                         >
                             {options.map((option, index) => (
                                 <option key={index} value={option.value}>
