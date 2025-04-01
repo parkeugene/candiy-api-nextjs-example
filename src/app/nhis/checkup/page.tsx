@@ -114,8 +114,8 @@ export default function NhisPage() {
                             className="w-full p-4 h-10 border rounded"
                         >
                             {options.map((option, index) => (
-                                <option key={index} value={index}>
-                                    {option}
+                                <option key={index} value={option.value}>
+                                    {option.key}
                                 </option>
                             ))}
                         </select>

@@ -1,7 +1,7 @@
-import { FormDataType } from "../types/nhis";
-import {JSX} from "react";
+import { JSX } from "react";
+import { FormDataType } from "../types/hira";
 
-interface FormProps {
+interface HiraFormProps {
     formData: FormDataType;
     handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
     renderInputField: (
@@ -17,11 +17,11 @@ interface FormProps {
     ) => JSX.Element;
 }
 
-const Form: React.FC<FormProps> = ({
-                                       formData,
-                                       renderInputField,
-                                       renderSelectField,
-                                   }) => {
+const HiraForm: React.FC<HiraFormProps> = ({
+    formData,
+    renderInputField,
+    renderSelectField,
+}) => {
     return (
         <div className="space-y-3 max-w-lg mx-auto">
             {renderSelectField("loginTypeLevel", formData.loginTypeLevel, [
@@ -42,6 +42,7 @@ const Form: React.FC<FormProps> = ({
             {renderInputField("id", "text", "사용자 ID", formData.id)}
             {renderInputField("legalName", "text", "이름", formData.legalName)}
             {renderInputField("birthdate", "text", "생년월일 (예: 19801212)", formData.birthdate)}
+            {renderInputField("identity", "password", "주민번호 뒷자리", formData.identity)}
             {renderInputField("phoneNo", "text", "전화번호 (예: 01012345678)", formData.phoneNo)}
 
             {renderSelectField("telecom", formData.telecom, [
@@ -54,4 +55,4 @@ const Form: React.FC<FormProps> = ({
     );
 };
 
-export default Form;
+export default HiraForm;

@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { FormDataType, MultiFactorInfo, FormError } from "@/app/types/nhis";
+import { FormDataType, MultiFactorInfo, FormError } from "@/app/types/hira";
 import Button from "@/app/components/Button";
-import Form from "@/app/components/Form";
+import HiraForm from "@/app/components/HiraForm";
 import { validateField, validateForm } from "@/app/utils/nhis-validation";
 
 export default function NhisPage() {
@@ -13,6 +13,7 @@ export default function NhisPage() {
         birthdate: "",
         phoneNo: "",
         telecom: "",
+        identity: "",
     });
 
     const [multiFactorInfo, setMultiFactorInfo] = useState<MultiFactorInfo | null>(null);
@@ -30,7 +31,7 @@ export default function NhisPage() {
         if (error.id || !validateForm(formData, setError)) return;
         setLoading(true);
         try {
-            const response = await fetch("/api/nhis/treatment-record", {
+            const response = await fetch("/api/hira/medication-overall", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
@@ -64,7 +65,7 @@ export default function NhisPage() {
         };
 
         try {
-            const response = await fetch("/api/nhis/treatment-record", {
+            const response = await fetch("/api/hira/medication-overall", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(finalRequestBody),
@@ -91,9 +92,9 @@ export default function NhisPage() {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4 text-center">Candiy API 예제 - 진료 및 투약정보</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center">Candiy API 예제 - 투약 이력</h1>
             <div className="space-y-3 max-w-lg mx-auto">
-                <Form
+                <HiraForm
                     formData={formData}
                     handleChange={handleChange}
                     renderInputField={(name, type, placeholder, value) => (
