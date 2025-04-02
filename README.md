@@ -1,5 +1,8 @@
 # CANDIY API 예제 (Next.js 사용)
 
+<img width="581" alt="image" src="https://github.com/user-attachments/assets/cf419a1d-5d73-4e13-b65a-7ae8347747c7" />
+
+
 ## 시작하기
 .env.example 파일을 복사하여 `.env.local`로 이름을 바꾸고, API 키를 입력하세요.
 
