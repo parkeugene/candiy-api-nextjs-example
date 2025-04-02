@@ -4,13 +4,19 @@ export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
 
-        const candiyResponse = await fetch("https://api.candiy.io/v1/nhis/treatment_record", {
+        // FIXME: birthdate에 '19' 접두사 추가
+        const modifiedBody = {
+            ...body,
+            birthdate: `19${body.birthdate}`
+        };
+
+        const candiyResponse = await fetch("https://api.candiy.io/v1/hira/medical_record", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "x-api-key": process.env.CANDIY_API_KEY || "", // 환경 변수로 관리
             },
-            body: JSON.stringify(body),
+            body: JSON.stringify(modifiedBody),
         });
         const data = await candiyResponse.json();
 
@@ -20,8 +26,6 @@ export async function POST(req: NextRequest) {
         }
 
         //database 저장
-
-
         return NextResponse.json(data);
     } catch (error) {
         // error가 Error 객체인지 체크

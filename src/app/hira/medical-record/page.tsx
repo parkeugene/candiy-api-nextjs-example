@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import { FormDataType, MultiFactorInfo, FormError } from "@/app/types/nhis";
+import { FormDataType, MultiFactorInfo, FormError } from "@/app/types/hira";
 import Button from "@/app/components/Button";
-import NhisForm from "@/app/components/form/NhisForm";
-import { validateField, validateForm } from "@/app/utils/nhis-validation";
+import HiraForm from "@/app/components/form/HiraForm";
+import { validateField, validateForm } from "@/app/utils/hira-validation";
 
 export default function NhisPage() {
     const [formData, setFormData] = useState<FormDataType>({
@@ -13,6 +13,7 @@ export default function NhisPage() {
         birthdate: "",
         phoneNo: "",
         telecom: "",
+        identity: "",
     });
 
     const [multiFactorInfo, setMultiFactorInfo] = useState<MultiFactorInfo | null>(null);
@@ -30,17 +31,17 @@ export default function NhisPage() {
         if (error.id || !validateForm(formData, setError)) return;
         setLoading(true);
         try {
-            const response = await fetch("/api/nhis/treatment-record", {
+            const response = await fetch("/api/hira/medical-record", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
             });
             const responseObject = await response.json();
+            console.log("responseObject: ", responseObject);
             if (response.status === 500) throw new Error(`Server error occurred, please try again later. \nstatus: ${response.status}, message: ${responseObject?.message || "Unknown error"}`);
             if (responseObject.status !== 'success') throw new Error(`Client errror occurred, message: ${responseObject?.message || "Unknown error"}`);
             
             const data = responseObject.data;
-
             setMultiFactorInfo({
                 transactionId: data.transactionId,
                 jobIndex: data.jobIndex,
@@ -48,7 +49,7 @@ export default function NhisPage() {
                 multiFactorTimestamp: data.multiFactorTimestamp,
             });
         } catch (err) {
-            setError({ id: `${(err as Error).message}` });
+            setError({ id: `Failed to fetch data: ${(err as Error).message}` });
         } finally {
             setLoading(false);
         }
@@ -67,7 +68,7 @@ export default function NhisPage() {
         };
 
         try {
-            const response = await fetch("/api/nhis/treatment-record", {
+            const response = await fetch("/api/hira/medical-record", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(finalRequestBody),
@@ -76,10 +77,10 @@ export default function NhisPage() {
             const responseObject = await response.json();
             if (response.status === 500) throw new Error(`Server error occurred, please try again later. \nstatus: ${response.status}, message: ${responseObject?.message || "Unknown error"}`);
             if (responseObject.status !== 'success') throw new Error(`Client errror occurred, message: ${responseObject?.message || "Unknown error"}`);
-
+            
             setResponseData(responseObject);
         } catch (err) {
-            setError({ id: `${(err as Error).message}` });
+            setError({ id: err instanceof Error ? err.message : "알 수 없는 오류 발생" });
         }
     };
 
@@ -95,9 +96,9 @@ export default function NhisPage() {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4 text-center">Candiy API 예제 - 진료 및 투약정보</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center">Candiy API 예제  - 진료기록</h1>
             <div className="space-y-3 max-w-lg mx-auto">
-                <NhisForm
+                <HiraForm
                     formData={formData}
                     handleChange={handleChange}
                     renderInputField={(name, type, placeholder, value) => (
