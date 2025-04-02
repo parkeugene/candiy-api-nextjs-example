@@ -25,7 +25,15 @@ const HiraForm: React.FC<HiraFormProps> = ({
 }) => {
     const additionalFields = (
         <>
-            {renderInputField("identity", "password", "주민번호 뒷자리", formData.identity)}
+            <div className="mb-4 flex gap-4">
+                <div className="flex-1">
+                    {renderInputField("birthdate", "text", "주민번호 앞자리", formData.birthdate)}
+                </div>
+                <div className="flex-1">
+                    {renderInputField("identity", "password", "주민번호 뒷자리", formData.identity)}
+                </div>
+                
+            </div>
         </>
     );
 

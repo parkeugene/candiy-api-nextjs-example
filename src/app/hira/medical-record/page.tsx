@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FormDataType, MultiFactorInfo, FormError } from "@/app/types/hira";
 import Button from "@/app/components/Button";
 import HiraForm from "@/app/components/form/HiraForm";
-import { validateField, validateForm } from "@/app/utils/nhis-validation";
+import { validateField, validateForm } from "@/app/utils/hira-validation";
 
 export default function NhisPage() {
     const [formData, setFormData] = useState<FormDataType>({

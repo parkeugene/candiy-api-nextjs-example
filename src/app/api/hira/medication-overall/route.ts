@@ -3,6 +3,10 @@ import { NextRequest, NextResponse } from  "next/server";
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
+        const modifiedBody = {
+            ...body,
+            birthdate: `19${body.birthdate}`
+        };
 
         const candiyResponse = await fetch("https://api.candiy.io/v1/hira/medication_overall", {
             method: "POST",
@@ -10,7 +14,7 @@ export async function POST(req: NextRequest) {
                 "Content-Type": "application/json",
                 "x-api-key": process.env.CANDIY_API_KEY || "", // 환경 변수로 관리
             },
-            body: JSON.stringify(body),
+            body: JSON.stringify(modifiedBody),
         });
         const data = await candiyResponse.json();
 

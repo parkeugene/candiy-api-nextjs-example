@@ -23,11 +23,18 @@ const NhisForm: React.FC<FormProps> = ({
     renderInputField,
     renderSelectField,
 }) => {
+const additionalFields = (
+        <>
+        {renderInputField("birthdate", "text", "생년월일 (예: 19801212)", formData.birthdate)}
+        </>
+    );
+
     return (
         <BaseForm<FormDataType>
             formData={formData}
             renderInputField={renderInputField}
             renderSelectField={renderSelectField}
+            additionalFields={additionalFields}
         />
     );
 };

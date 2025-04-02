@@ -38,18 +38,16 @@ const BaseForm = <T extends Record<string, any>>({
                 { key: "하나은행(하나인증서)", value: "10" },
                 { key: "NH모바일인증서", value: "11" },
             ])}
-
-            {renderInputField("id", "text", "사용자 ID", formData.id)}
-            {renderInputField("legalName", "text", "이름", formData.legalName)}
-            {renderInputField("birthdate", "text", "생년월일 (예: 19801212)", formData.birthdate)}
-            {renderInputField("phoneNo", "text", "전화번호 (예: 01012345678)", formData.phoneNo)}
-
             {renderSelectField("telecom", formData.telecom, [
                 { key: "통신사 선택", value: "" },
                 { key: "SKT(SKT알뜰폰)", value: "0" },
                 { key: "KT(KT알뜰폰)", value: "1" },
                 { key: "LG U+(LG U+알뜰폰)", value: "2" },
             ])}
+            {renderInputField("id", "text", "사용자 ID", formData.id)}
+            {renderInputField("legalName", "text", "이름", formData.legalName)}
+            {renderInputField("phoneNo", "text", "전화번호 (예: 01012345678)", formData.phoneNo)}
+
 
             {additionalFields}
         </div>
