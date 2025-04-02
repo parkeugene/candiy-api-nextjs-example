@@ -1,4 +1,4 @@
-# CANDiY API 예제 (Next.js 사용)
+# CANDiY API 예제 (Next.js)
 
 <img width="581" alt="image" src="https://github.com/user-attachments/assets/cf419a1d-5d73-4e13-b65a-7ae8347747c7" />
 
