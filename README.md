@@ -39,7 +39,7 @@ bun dev
 브라우저를 열고 [http://localhost:3000](http://localhost:3000)로 이동하세요.
 
 ## API 라우트
-API 라우트는 `src/app/api` 디렉터리에 위치해 있습니다. 다음과 같은 라우트를 사용할 수 있습니다:
+API 라우트는 `src/app/api` 디렉터리에 위치해 있습니다. 
 
 ## 페이지
 - `/` - 홈페이지
