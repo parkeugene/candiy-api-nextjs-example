@@ -92,11 +92,13 @@ export default function NhisPage() {
     const sendVerificationRequest = async () => {
         let finalRequestBody = {};
 
+        console.log(formData);
+
         // 간편인증
-        if (formData.loginTypeLevel === "2") {
+        if (formData.loginType === "2") {
 
             if (!formData.smsAuthNo) {
-                setError({ smsAuthNo: "인증번호를 입력해주세요." });
+                setError(prev => ({ ...prev, smsAuthNo: "인증번호를 입력해주세요." }));
                 return;
             }
 

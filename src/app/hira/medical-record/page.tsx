@@ -89,7 +89,7 @@ export default function NhisPage() {
     const sendVerificationRequest = async () => {
         let finalRequestBody = {};
         // 간편인증
-        if (formData.loginTypeLevel === "2") {
+        if (formData.loginType === "2") {
 
             if (!formData.smsAuthNo) {
                 setError({ smsAuthNo: "인증번호를 입력해주세요." });
@@ -143,7 +143,7 @@ export default function NhisPage() {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4 text-center">Candiy API 예제  - 진료기록</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center">Candiy API 예제  - 내 진료 정보 열람</h1>
             <div className="space-y-3 max-w-lg mx-auto">
                 <HiraForm
                     formData={formData}
