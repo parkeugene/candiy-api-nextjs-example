@@ -23,7 +23,7 @@ interface BaseFormProps<T> {
     showLoginTypeLevel?: boolean,
 }
 
-const BaseForm = <T extends Record<string, any>>({
+const BaseForm = <T extends Record<string, never>>({
                                                      formData,
                                                      renderRadioField,
                                                      renderInputField,
