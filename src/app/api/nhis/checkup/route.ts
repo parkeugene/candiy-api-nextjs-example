@@ -2,9 +2,11 @@ import { NextRequest, NextResponse } from  "next/server";
 
 export async function POST(req: NextRequest) {
     try {
+        const CANDIY_API_URL= process.env.CANDIY_API_URL || "https://api.candiy.io/v1"
+
         const body = await req.json();
 
-        const candiyResponse = await fetch("https://api.candiy.io/v1/nhis/checkup", {
+        const candiyResponse = await fetch(CANDIY_API_URL + "/nhis/checkup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

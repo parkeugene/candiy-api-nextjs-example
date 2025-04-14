@@ -38,7 +38,7 @@ export default function NhisPage() {
             const responseObject = await response.json();
             if (response.status === 500) throw new Error(`Server error occurred, please try again later. \nstatus: ${response.status}, message: ${responseObject?.message || "Unknown error"}`);
             if (responseObject.status !== 'success') throw new Error(`Client errror occurred, message: ${responseObject?.message || "Unknown error"}`);
-            
+
             const data = responseObject.data;
 
             setMultiFactorInfo({
@@ -66,6 +66,9 @@ export default function NhisPage() {
             multiFactorInfo,
         };
 
+        if (error.id) return;
+        setLoading(true);
+
         try {
             const response = await fetch("/api/nhis/treatment-record", {
                 method: "POST",
@@ -80,6 +83,8 @@ export default function NhisPage() {
             setResponseData(responseObject);
         } catch (err) {
             setError({ id: `${(err as Error).message}` });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -110,7 +115,7 @@ export default function NhisPage() {
                             className="w-full p-2 border rounded"
                         />
                     )}
-                    renderSelectField={(name, value, options) => (
+                    renderLoginTypeLevelField={(name, value, options) => (
                         <select
                             name={name}
                             value={value}
@@ -124,6 +129,22 @@ export default function NhisPage() {
                             ))}
                         </select>
                     )}
+                    renderTelecomSelectField={
+                        (name, value, options) => (
+                            <select
+                                name={name}
+                                value={value}
+                                onChange={handleChange}
+                                className="w-full h-10 border rounded"
+                            >
+                                {options.map((option, index) => (
+                                    <option key={index} value={option.value}>
+                                        {option.key}
+                                    </option>
+                                ))}
+                            </select>
+                        )
+                    }
                 />
 
                 {!multiFactorInfo && (
