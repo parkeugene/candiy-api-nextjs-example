@@ -115,6 +115,11 @@ export default function NhisPage() {
                 multiFactorInfo,
             };
         }
+
+        if (error.id) return;
+        setLoading(true);
+
+
         try {
             const response = await fetch("/api/hira/medical-record", {
                 method: "POST",
@@ -129,7 +134,10 @@ export default function NhisPage() {
             setResponseData(responseObject);
         } catch (err) {
             setError({ id: err instanceof Error ? err.message : "알 수 없는 오류 발생" });
+        } finally {
+            setLoading(false);
         }
+
     };
 
 

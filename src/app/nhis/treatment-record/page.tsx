@@ -66,6 +66,9 @@ export default function NhisPage() {
             multiFactorInfo,
         };
 
+        if (error.id) return;
+        setLoading(true);
+
         try {
             const response = await fetch("/api/nhis/treatment-record", {
                 method: "POST",
@@ -80,6 +83,8 @@ export default function NhisPage() {
             setResponseData(responseObject);
         } catch (err) {
             setError({ id: `${(err as Error).message}` });
+        } finally {
+            setLoading(false);
         }
     };
 
