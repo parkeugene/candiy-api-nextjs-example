@@ -42,6 +42,7 @@ const additionalFields = (
             renderLoginTypeLevelField={renderLoginTypeLevelField}
             renderTelecomSelectField={renderTelecomSelectField}
             additionalFields={additionalFields}
+            showLoginTypeLevel={true}
         />
     );
 };

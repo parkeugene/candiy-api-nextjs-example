@@ -29,7 +29,7 @@ export const validateForm = (formData: FormDataType, setError: React.Dispatch<Re
         if (!formData[key as keyof FormDataType]) {
             switch (key) {
                 case "loginTypeLevel":
-                    if (String(formData.loginType) === "1" && !formData.loginTypeLevel) {
+                    if (String(formData.loginType) === "1") {
                         errorMsg = "간편인증 선택은 필수 입력값입니다.";
                     }
                     break;
