@@ -1,7 +1,6 @@
 import { JSX } from "react";
 import React, { useState, useEffect } from "react";
 import { FormDataType } from "../../types/hira";
-import BaseForm from "./BaseForm";
 
 interface HiraFormProps {
     formData: FormDataType;
@@ -15,9 +14,9 @@ interface HiraFormProps {
     ) => JSX.Element;
     renderLoginTypeLevelField: (
         name: keyof FormDataType,
-        value: string,
+        value: string | undefined,
         options: { key: string; value: string }[]
-    ) => JSX.Element;
+    ) => React.JSX.Element;
     renderTelecomSelectField: (
         name: keyof FormDataType,
         value: string,
@@ -33,10 +32,10 @@ const HiraForm: React.FC<HiraFormProps> = ({
                                                renderLoginTypeLevelField,
                                                renderTelecomSelectField,
                                            }) => {
-    const [showLoginTypeLevel, setShowLoginTypeLevel] = useState(formData.loginType === "1");
+    const [showLoginTypeLevel, setShowLoginTypeLevel] = useState(formData.loginType === "2");
 
     useEffect(() => {
-        setShowLoginTypeLevel(formData.loginType === "1");
+        setShowLoginTypeLevel(formData.loginType === "5");
     }, [formData.loginType]);
 
     const handleLoginTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,8 +59,8 @@ const HiraForm: React.FC<HiraFormProps> = ({
                     <input
                         type="radio"
                         name="loginType"
-                        value="1"
-                        checked={formData.loginType === "1"}
+                        value="5"
+                        checked={formData.loginType === "5"}
                         onChange={handleLoginTypeChange}
                     />
                     <span className="text-white">간편인증</span>
@@ -92,17 +91,38 @@ const HiraForm: React.FC<HiraFormProps> = ({
     );
 
     return (
-        <BaseForm<FormDataType>
-            formData={formData}
-            renderRadioField={renderRadioField()}
-            renderInputField={renderInputField}
-            {...(showLoginTypeLevel && {
-                renderLoginTypeLevelField: renderLoginTypeLevelField,
-            })}
-            renderTelecomSelectField={renderTelecomSelectField}
-            additionalFields={additionalFields}
-            showLoginTypeLevel={showLoginTypeLevel}
-        />
+        <div className="space-y-3 max-w-lg mx-auto">
+            {renderRadioField()}
+            {showLoginTypeLevel && renderLoginTypeLevelField?.("loginTypeLevel", formData.loginTypeLevel, [
+                {key: "간편인증 선택", value: ""},
+                {key: "카카오톡", value: "1"},
+                {key: "페이코", value: "2"},
+                {key: "삼성패스", value: "3"},
+                {key: "국민은행(국민인증서)", value: "4"},
+                {key: "통신사(PASS)", value: "5"},
+                {key: "네이버", value: "6"},
+                {key: "신한은행(신한인증서)", value: "7"},
+                {key: "토스", value: "8"},
+                {key: "뱅크샐러드", value: "9"},
+                {key: "하나은행(하나인증서)", value: "10"},
+                {key: "NH모바일인증서", value: "11"},
+            ])}
+            {renderTelecomSelectField("telecom", formData.telecom, [
+                {key: "통신사 선택", value: ""},
+                {key: "SKT", value: "0"},
+                {key: "KT", value: "1"},
+                {key: "LG U+", value: "2"},
+                {key: "SKT 알뜰폰", value: "3"},
+                {key: "KT 알뜰폰", value: "4"},
+                {key: "LG U+ 알뜰폰", value: "5"},
+            ])}
+            {renderInputField("id", "text", "사용자 ID", formData.id)}
+            {renderInputField("legalName", "text", "이름", formData.legalName)}
+            {renderInputField("phoneNo", "text", "전화번호 (예: 01012345678)", formData.phoneNo)}
+
+            {additionalFields}
+            {showLoginTypeLevel}
+        </div>
     );
 };
 

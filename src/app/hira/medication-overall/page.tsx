@@ -215,7 +215,7 @@ export default function NhisPage() {
 
                 {multiFactorInfo && (
                     <>
-                        {(formData.loginType === "1") && (
+                        {(formData.loginType === "5") && (
                             <div className="text-center">
                                 <p>인증 요청이 완료되었습니다. <br/>휴대전화에서 인증을 완료한 후 인증 확인을 클릭해주세요.</p>
                             </div>
