@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from  "next/server";
 
 export async function POST(req: NextRequest) {
 
+    // get env variable from env.local
+    const CANDIY_API_URL = process.env.CANDIY_API_URL || "https://api.candiy.io/v1"
+
     function getDateYearsAgo(yearsAgo = 5) {
         const date = new Date();
         date.setFullYear(date.getFullYear() - yearsAgo);
@@ -24,7 +27,7 @@ export async function POST(req: NextRequest) {
             startDate: getDateYearsAgo(5)
         };
 
-        const candiyResponse = await fetch("https://1api.candiy.io/v1/hira/medical_record", {
+        const candiyResponse = await fetch( CANDIY_API_URL + "/hira/medical_record", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

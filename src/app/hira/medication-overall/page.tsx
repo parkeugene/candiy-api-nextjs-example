@@ -4,6 +4,7 @@ import { FormDataType, MultiFactorInfo, FormError } from "@/app/types/hira";
 import Button from "@/app/components/Button";
 import HiraForm from "@/app/components/form/HiraForm";
 import { validateField, validateForm } from "@/app/utils/hira-validation";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
 
 export default function NhisPage() {
     const [formData, setFormData] = useState<FormDataType>({
@@ -246,11 +247,16 @@ export default function NhisPage() {
                                 </form>
                             </>
                         )}
-                        <Button
-                            onClick={sendVerificationRequest}
-                            label="인증 확인"
-                            disabled={loading}
-                        />
+                        {loading ? (
+                            <LoadingSpinner />
+                        ) : (
+                            <Button
+                                onClick={sendVerificationRequest}
+                                label="인증 확인"
+                                disabled={loading}
+                            />
+                        )}
+
                     </>
                 )}
             </div>
