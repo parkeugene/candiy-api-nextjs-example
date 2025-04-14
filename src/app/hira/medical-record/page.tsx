@@ -99,7 +99,8 @@ export default function NhisPage() {
             finalRequestBody = {
                 ...formData,
                 isContinue: "1",
-                smsAuthNo: formData.smsAuthNo
+                smsAuthNo: formData.smsAuthNo,
+                multiFactorInfo,
             };
         }else {
 

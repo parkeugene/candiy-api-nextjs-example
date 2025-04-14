@@ -51,9 +51,12 @@ const BaseForm = <T extends Record<string, any>>({
             ])}
             {renderTelecomSelectField("telecom", formData.telecom, [
                 {key: "통신사 선택", value: ""},
-                {key: "SKT(SKT알뜰폰)", value: "0"},
-                {key: "KT(KT알뜰폰)", value: "1"},
-                {key: "LG U+(LG U+알뜰폰)", value: "2"},
+                {key: "SKT", value: "0"},
+                {key: "KT", value: "1"},
+                {key: "LG U+", value: "2"},
+                {key: "SKT 알뜰폰", value: "3"},
+                {key: "KT 알뜰폰", value: "4"},
+                {key: "LG U+ 알뜰폰", value: "5"},
             ])}
             {renderInputField("id", "text", "사용자 ID", formData.id)}
             {renderInputField("legalName", "text", "이름", formData.legalName)}

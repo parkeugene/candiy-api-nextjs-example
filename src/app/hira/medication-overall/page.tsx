@@ -4,7 +4,6 @@ import { FormDataType, MultiFactorInfo, FormError } from "@/app/types/hira";
 import Button from "@/app/components/Button";
 import HiraForm from "@/app/components/form/HiraForm";
 import { validateField, validateForm } from "@/app/utils/hira-validation";
-import LoadingSpinner from "@/app/components/LoadingSpinner";
 
 export default function NhisPage() {
     const [formData, setFormData] = useState<FormDataType>({
@@ -53,6 +52,7 @@ export default function NhisPage() {
 
         if (error.id || !validateForm(formData, setError)) return;
         setLoading(true);
+
         try {
             const response = await fetch("/api/hira/medication-overall", {
                 method: "POST",
@@ -93,7 +93,7 @@ export default function NhisPage() {
     const sendVerificationRequest = async () => {
         let finalRequestBody = {};
 
-        console.log(formData);
+
 
         // 간편인증
         if (formData.loginType === "2") {
@@ -106,7 +106,8 @@ export default function NhisPage() {
             finalRequestBody = {
                 ...formData,
                 isContinue: "1",
-                smsAuthNo: formData.smsAuthNo
+                smsAuthNo: formData.smsAuthNo,
+                multiFactorInfo,
             };
         }else {
 
@@ -122,9 +123,10 @@ export default function NhisPage() {
             };
         }
 
+        if (error.id) return;
+        setLoading(true);
+
         try {
-
-
 
             const response = await fetch("/api/hira/medication-overall", {
                 method: "POST",
@@ -139,7 +141,10 @@ export default function NhisPage() {
             setResponseData(responseObject);
         } catch (err) {
             setError({ id: err instanceof Error ? err.message : "알 수 없는 오류 발생" });
+        } finally {
+            setLoading(false);
         }
+
     };
 
 
@@ -247,16 +252,11 @@ export default function NhisPage() {
                                 </form>
                             </>
                         )}
-                        {loading ? (
-                            <LoadingSpinner />
-                        ) : (
-                            <Button
-                                onClick={sendVerificationRequest}
-                                label="인증 확인"
-                                disabled={loading}
-                            />
-                        )}
-
+                        <Button
+                            onClick={sendVerificationRequest}
+                            label="인증 확인"
+                            disabled={loading}
+                        />
                     </>
                 )}
             </div>
