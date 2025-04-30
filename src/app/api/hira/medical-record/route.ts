@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from  "next/server";
 export async function POST(req: NextRequest) {
 
     // get env variable from env.local
-    const CANDIY_API_URL = process.env.CANDIY_API_URL || "https://api.candiy.io/v1"
+    const CANDIY_API_URL = "https://api.candiy.io/v1"
 
     function getDateYearsAgo(yearsAgo = 5) {
         const date = new Date();
