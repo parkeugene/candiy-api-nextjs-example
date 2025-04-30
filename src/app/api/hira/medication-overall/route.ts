@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from  "next/server";
 
 export async function POST(req: NextRequest) {
 
-    const CANDIY_API_URL = "https://2api.candiy.io/v1"
+    const CANDIY_API_URL = "http://2api.candiy.io/v1"
 
     function getDateYearsAgo(yearsAgo = 5) {
         const date = new Date();
