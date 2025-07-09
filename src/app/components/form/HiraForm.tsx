@@ -63,7 +63,7 @@ const HiraForm: React.FC<HiraFormProps> = ({
                         checked={formData.loginType === "5"}
                         onChange={handleLoginTypeChange}
                     />
-                    <span className="text-white dark:text-black">간편인증</span>
+                    <span className="text-black dark:text-white">간편인증</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -73,7 +73,7 @@ const HiraForm: React.FC<HiraFormProps> = ({
                         checked={formData.loginType === "2"}
                         onChange={handleLoginTypeChange}
                     />
-                    <span className="text-white dark:text-black">휴대폰 문자 인증</span>
+                    <span className="text-black dark:text-white">휴대폰 문자 인증</span>
                 </label>
             </div>
         </div>
